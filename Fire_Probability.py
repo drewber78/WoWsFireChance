@@ -5,6 +5,7 @@
 #
 # ChangeLog (Who,When,What):
 #           Drew Cochran, 01APR2023, Created project, working initial script
+#           Drew Cochran, 02APR2023, Create File Processor and IO Classes
 # 
 # 
 # ------------------------------------------------------------------------
@@ -186,14 +187,15 @@ class FileProcessor:
 
 # Presentation (Input/Output)   -------------------------------------------------#
 
+
 class IO:
     """
-    Class for performing Input and Output
+    Class for performing Input and Output.
 
     methods:
-        print_items(): Prints current ship class and fire chance from list.
-
         print_menu_items(): Prints user menu
+
+        print_items(): Prints current ship class and fire chance from list.
 
         input_ship_class_data(): Inputs new data into lstOfShipObjects
 
@@ -204,3 +206,50 @@ class IO:
     changelog: (Who, When, What)
         Drew Cochran, 02APR2023, Created Class
     """
+
+    def __init__(self):
+        """
+        Init for class
+        """
+
+    # Add code to show menu to user
+    @staticmethod
+    def print_menu_items():
+        """
+        Display a menu of choices to the user
+        :return: nothing
+        """
+
+        print('''
+        Menu of Options
+        1) Show current list of ship class and fire chance percentage.
+        2) Add a new ship class and fire chance percentage to list.
+        3) Change name or fire chance for ships.
+        4) Calculate fire chance for hits on target. 
+        5) Save data to file.
+        6) Exit program.
+        ''')
+        print() # Add an extra line for looks
+
+    @staticmethod
+    def UserChoice():
+        """
+        Accepts user inputs for print_menu_items and returns value.
+        :return: strChoice
+        """
+
+        strChoice = str(input("Which option would you like to perform? [1 to 6] - "))
+        return strChoice
+
+    @staticmethod
+    def print_items():
+        """
+        Function to display on screen data from lstOfShipObjects
+        :return: nothing
+        """
+        # for loop to iterate through lstOfShipObjects
+        for row in lstOfShipObjects:
+            printName = row.get_ship_class()
+            printChance = row.get_fire_chance()
+            print("%s, %d" % (printName, printChance), sep='\n', end='\n')
+
